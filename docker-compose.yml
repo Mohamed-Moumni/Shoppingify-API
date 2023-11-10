@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    restart: always
+    env_file:
+      - ./server/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
