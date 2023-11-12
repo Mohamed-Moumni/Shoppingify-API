@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum State {
+  CANCELED
+  COMPLETED
+}
+
+
+model User{
+  id String @id @default(uuid())
+
+  firstname String
+
+  lastname String
+
+  email String @unique
+
+  password String
+
+  created_at DateTime @default(now())
+}
+
+model Item{
+  id String @id @default(uuid())
+  name String @unique
+  note String
+  image String
+  create_at DateTime @default(now())
+
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  listItem ListItem[]
+}
+
+model Category{
+  id String @id @default(uuid())
+  name String @unique
+
+  items Item[]
+}
+
+model List{
+  id String @id @default(uuid())
+  name String
+  state State
+  listItem ListItem[]
+}
+
+model ListItem{
+  @@id([listId, itemId])
+  count Int
+  added_at DateTime
+
+  list List @relation(fields: [listId], references: [id])
+  listId String
+  item Item @relation(fields: [itemId], references: [id])
+  itemId String
+}

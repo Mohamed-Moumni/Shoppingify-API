@@ -1,0 +1,27 @@
+name: shoppingify-Api
+
+on:
+    push:
+        branches:
+            - main        
+    pull_request:
+        branches:
+            - main
+
+env:
+    API_KEY: ${{secrets.API_TOKEN}}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install modules
+      run: npm ci
+      working-directory: ./server
+
+    - name: Run tests
+      run: npm run test
+      working-directory: ./server
