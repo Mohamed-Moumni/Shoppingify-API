@@ -117,3 +117,17 @@ export function IconSearch(props: SVGProps) {
 		</svg>
 	);
 }
+
+export function IconPlus(props: SVGProps) {
+	return (
+		<svg
+			viewBox='0 0 1024 1024'
+			xmlns='http://www.w3.org/2000/svg'
+			fill='currentColor'
+			overflow='hidden'
+			{...props}
+		>
+			<path d='M768 554.667H554.667V768c0 23.467-19.2 42.667-42.667 42.667s-42.667-19.2-42.667-42.667V554.667H256c-23.467 0-42.667-19.2-42.667-42.667s19.2-42.667 42.667-42.667h213.333V256c0-23.467 19.2-42.667 42.667-42.667s42.667 19.2 42.667 42.667v213.333H768c23.467 0 42.667 19.2 42.667 42.667s-19.2 42.667-42.667 42.667z' />
+		</svg>
+	);
+}

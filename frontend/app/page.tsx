@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "@styles/items.module.css";
-import { IconSearch } from "@components/Icons";
+import { IconSearch, IconPlus } from "@components/Icons";
 
 const goods = [
 	{
@@ -77,12 +77,12 @@ export default function Home() {
 					</label>
 				</form>
 			</div>
-			<div className={"px-20 py-14 space-y-12"}>
+			<div className={"px-20 py-14 space-y-11"}>
 				{goods.map((good) => {
 					return (
 						<div key={good.group}>
-							<p className='mb-2'>{good.group}</p>
-							<div className='grid grid-cols-4  gap-y-4 gap-x-8'>
+							<p className='mb-6'>{good.group}</p>
+							<div className='grid grid-cols-4 gap-y-10 gap-x-5'>
 								{good.items.map((item) => {
 									return (
 										<div>
@@ -92,6 +92,12 @@ export default function Home() {
 												}
 											>
 												{item}
+												<span
+													style={{ color: "#C1C1C4" }}
+													className='relative'
+												>
+													<IconPlus className='h-6 w-6 absolute right-0 top-0' />
+												</span>
 											</button>
 										</div>
 									);
