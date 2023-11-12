@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
+import { UsersController } from './users/controller/users/users.controller';
+import { UsersService } from './users/service/users/users.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './model/user.entity';
-import { configService } from './config/config.service';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [UsersModule,
-    TypeOrmModule.forRoot(configService.getTypeOrmConfig())],
+  imports: [UsersModule, DatabaseModule],
   controllers: [],
   providers: [],
 })
