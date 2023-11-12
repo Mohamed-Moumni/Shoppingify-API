@@ -46,7 +46,7 @@
 	line-height: normal;
 }
 
-.items__add__button {
+.items__button {
 	text-align: left;
 	width: 100%;
 	border-radius: 0.75rem;
@@ -60,5 +60,23 @@
 	line-height: normal;
 
 	padding: 0.81rem;
+	padding-right: 2.25rem;
 	position: relative;
+}
+
+.items__button__icon {
+	height: 1.5rem;
+	width: 1.5rem;
+	position: absolute;
+	top: 0.81rem;
+	right: 0.75rem;
+}
+
+.items__buttons__group {
+	margin-bottom: 1.5rem;
+	color: #000;
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
 }

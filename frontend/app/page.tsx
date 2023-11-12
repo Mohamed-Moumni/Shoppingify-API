@@ -77,26 +77,29 @@ export default function Home() {
 					</label>
 				</form>
 			</div>
-			<div className={"px-20 py-14 space-y-11"}>
+			<div className={"px-16 py-14 space-y-11"}>
 				{goods.map((good) => {
 					return (
 						<div key={good.group}>
-							<p className='mb-6'>{good.group}</p>
+							<p className={styles.items__buttons__group}>
+								{good.group}
+							</p>
 							<div className='grid grid-cols-4 gap-y-10 gap-x-5'>
 								{good.items.map((item) => {
 									return (
 										<div>
 											<button
-												className={
-													styles.items__add__button
-												}
+												className={`${styles.items__button}`}
 											>
 												{item}
 												<span
 													style={{ color: "#C1C1C4" }}
-													className='relative'
 												>
-													<IconPlus className='h-6 w-6 absolute right-0 top-0' />
+													<IconPlus
+														className={
+															styles.items__button__icon
+														}
+													/>
 												</span>
 											</button>
 										</div>
