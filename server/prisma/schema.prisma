@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum State {
+  CANCELED
+  COMPLETED
+}
+
 
 model User{
   id String @id @default(uuid())
@@ -18,9 +23,46 @@ model User{
 
   lastname String
 
-  email String
+  email String @unique
 
   password String
 
   created_at DateTime @default(now())
+}
+
+model Item{
+  id String @id @default(uuid())
+  name String @unique
+  note String
+  image String
+  create_at DateTime @default(now())
+
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  listItem ListItem[]
+}
+
+model Category{
+  id String @id @default(uuid())
+  name String @unique
+
+  items Item[]
+}
+
+model List{
+  id String @id @default(uuid())
+  name String
+  state State
+  listItem ListItem[]
+}
+
+model ListItem{
+  @@id([listId, itemId])
+  count Int
+  added_at DateTime
+
+  list List @relation(fields: [listId], references: [id])
+  listId String
+  item Item @relation(fields: [itemId], references: [id])
+  itemId String
 }
