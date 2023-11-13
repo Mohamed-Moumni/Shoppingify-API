@@ -1,8 +1,6 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 import { userCreateDto } from '../../Dtos/userCreate.dto';
 import * as bcrypt from 'bcrypt';
-import { InjectRepository } from '@nestjs/typeorm';
 import { DatabaseService } from '../../../database/database.service';
 import { User } from '@prisma/client';
 
@@ -20,5 +18,11 @@ export class UsersService {
             data: { ...createUserDetail },
         });
         return user;
+    }
+
+    getUsers():Promise<User[]> | []{
+        return this.databaseService.user.findMany({
+
+        });
     }
 }

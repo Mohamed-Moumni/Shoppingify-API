@@ -1,8 +1,44 @@
 version: '3.8'
 services:
-  
+#   dev:
+#       container_name: shoppingify_api_dev
+#       image: shoppingify_api_dev:latest
+#       build:
+#           context: ./server
+#           target: development
+#           dockerfile: Dockerfile
+#       command: npm run start:debug
+#       ports:
+#           - 3000:3000
+#       env_file:
+#           - './server/.env'
+#       networks:
+#           - api-network
+#       volumes:
+#           - .:/usr/src/app
+#           - /usr/src/app/node_modules
+#       restart: unless-stopped
 
-  postgres:
+#   prod:
+#       container_name: shoppingify_api_prod:latest
+#       image: shoppingify_api_prod:latest
+#       build:
+#           context: ./server
+#           target: production
+#           dockerfile: Dockerfile
+#       command: npm run start:prod
+#       ports:
+#           - 3000:3000
+#       env_file:
+#           - './server/.env'
+#       networks:
+#           - api-network
+#       volumes:
+#           - .:/usr/src/app
+#           - /usr/src/app/node_modules
+#       restart: unless-stopped
+
+  database:
     container_name: postgres
     image: postgres:latest
     ports:
@@ -15,3 +51,6 @@ services:
 
 volumes:
   pgdata:
+
+# networks:
+#     api-network:
