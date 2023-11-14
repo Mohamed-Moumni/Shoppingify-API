@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthService } from './auth/service/auth/auth.service';
 import { AuthController } from './auth/controller/auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
-import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -17,6 +16,6 @@ import { APP_FILTER } from '@nestjs/core';
     AuthModule
   ],
   controllers: [AuthController],
-  providers: [AuthService,],
+  providers: [AuthService],
 })
 export class AppModule {}
