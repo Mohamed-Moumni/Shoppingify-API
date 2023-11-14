@@ -1,0 +1,82 @@
+.brand__name {
+	color: #f9a109;
+	font-weight: 700;
+}
+
+.items__desc {
+	color: #34333a;
+	font-size: 1.625rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	width: 28.14338rem;
+
+	padding-top: 0.75rem;
+}
+
+.items__container {
+	padding: 1.73rem 5rem;
+}
+
+.items__form__container {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.items__form {
+}
+.items__input {
+	width: 17.2255rem;
+	height: 3.18225rem;
+
+	border-radius: 0.75rem;
+	background: #fff;
+	box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.04);
+
+	padding: 0.25rem 3rem;
+
+	position: relative;
+}
+
+.items__input:is(::placeholder, ::-moz-placeholder, :-ms-input-placeholder) {
+	color: #bdbdbd;
+	font-size: 0.875rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+.items__button {
+	text-align: left;
+	width: 100%;
+	border-radius: 0.75rem;
+	background: #fff;
+	box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.05);
+
+	color: #000;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+
+	padding: 0.81rem;
+	padding-right: 2.25rem;
+	position: relative;
+}
+
+.items__button__icon {
+	height: 1.5rem;
+	width: 1.5rem;
+	position: absolute;
+	top: 0.81rem;
+	right: 0.75rem;
+}
+
+.items__buttons__group {
+	margin-bottom: 1.5rem;
+	color: #000;
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
