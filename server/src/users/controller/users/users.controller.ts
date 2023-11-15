@@ -1,22 +1,26 @@
-import { Body, Controller, Get, Post, UseFilters } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseFilters, UseGuards } from '@nestjs/common';
 import { userCreateDto } from '../../Dtos/userCreate.dto';
 import { UsersService } from '../../service/users/users.service';
-import { error } from 'console';
+import { AuthGuard } from '../../../auth/common/gurads/Auth.guard';
+import { JwtService } from '@nestjs/jwt';
 
 @Controller('users')
 export class UsersController {
-    constructor(private userService: UsersService) {
+    constructor(
+        private userService: UsersService,
+    ) {
         
     }
 
-    @Post('/register')
-    registerUser(@Body() userCreateDto: userCreateDto) {
-        return this.userService.createUser(userCreateDto);
-    }
-
     @Get()
+    @UseGuards(AuthGuard)
     getUsers() {
         return this.userService.getUsers();
     }
 
+    @Get('/home')
+    // @UseGuards(AuthGuard)
+    home() {
+        console.log("Hello World");
+    }
 }
