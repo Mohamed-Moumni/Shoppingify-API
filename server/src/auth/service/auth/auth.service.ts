@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../../../users/service/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { userCreateDto } from '../../../users/Dtos/userCreate.dto';
@@ -32,7 +32,7 @@ export class AuthService {
             sameSite: true,
             secure: false,
         });
-        res.redirect(`${configService.getValue('HOST')}:${configService.getValue('PORT')}/api/users/home`);
+        res.send({ status: HttpStatus.CREATED, message: 'User Authenticated' });
     }
 
     async matchPassword(password: string, storedHashedPassword: string): Promise<Boolean> {
