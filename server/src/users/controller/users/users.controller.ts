@@ -19,7 +19,7 @@ export class UsersController {
     }
 
     @Get('/home')
-    @UseGuards(AuthGuard)
+    // @UseGuards(AuthGuard)
     home() {
         console.log("Hello World");
     }

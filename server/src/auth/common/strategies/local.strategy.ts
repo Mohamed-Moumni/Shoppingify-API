@@ -22,9 +22,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
         const user = await this.authService.validateUser(email, password);
         if (!user)
             throw new UnauthorizedException();
-        const payload = { sub: user.id, firstname: user.firstname, lastname: user.lastname, email: user.email };
-        return {
-            access_token: await this.jwtService.signAsync(payload),
-        }
+        return user;
     }
 }

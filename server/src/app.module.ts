@@ -11,11 +11,11 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     DatabaseModule,
     ConfigModule.forRoot({
-      isGlobal:true,
+      isGlobal: true,
     }),
     AuthModule
   ],
   controllers: [AuthController],
   providers: [AuthService],
 })
-export class AppModule {}
+export class AppModule { }

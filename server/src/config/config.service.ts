@@ -4,7 +4,7 @@ class ConfigService {
 
     constructor(private env: { [k: string]: string | undefined }) { }
 
-    private getValue(key: string, throwOnMissing = true): string {
+    public getValue(key: string, throwOnMissing = true): string {
         const value = this.env[key];
         if (!value && throwOnMissing) {
             throw new Error(`config error - missing env.${key}`);
@@ -16,6 +16,8 @@ class ConfigService {
     public getSecret() {
         return this.env['SECRET'];
     }
+
+
     public ensureValues(keys: string[]) {
         keys.forEach(k => this.getValue(k, true));
         return this;

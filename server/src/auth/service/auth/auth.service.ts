@@ -5,6 +5,7 @@ import { userCreateDto } from '../../../users/Dtos/userCreate.dto';
 import { DatabaseService } from '../../../database/database.service';
 import * as bcrypt from 'bcrypt';
 import { Response } from 'express';
+import { configService } from '../../../config/config.service';
 
 export type payload = {
     sub: string,
@@ -23,17 +24,7 @@ export class AuthService {
     async userLogin(Email: string, Password: string): Promise<any>{
         return this.validateUser(Email, Password);
     }
-
-    async createUser(createUserDetail: userCreateDto): Promise<any> {
-        const hashedPassword: string = await bcrypt.hash(createUserDetail.password, 10);
-        createUserDetail.password = hashedPassword;
-
-        const { password, ...user } = await this.databaseService.user.create({
-            data: { ...createUserDetail },
-        });
-        return user;
-    }
-
+    
     signToken(payload: payload, res:Response) {
         const token: string = this.jwtService.sign(payload);
         res.cookie('jwt', token, {
@@ -41,7 +32,7 @@ export class AuthService {
             sameSite: true,
             secure: false,
         });
-        res.redirect("http://localhost:3000/api/users/home");
+        res.redirect(`${configService.getValue('HOST')}:${configService.getValue('PORT')}/api/users/home`);
     }
 
     async matchPassword(password: string, storedHashedPassword: string): Promise<Boolean> {
@@ -56,5 +47,4 @@ export class AuthService {
         const { password, ...rest } = user;
         return rest;
     }
-
 }

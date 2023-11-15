@@ -16,7 +16,7 @@ import { UsersService } from '../users/service/users/users.service';
     JwtModule.register({
       secret: configService.getSecret(),
       global: true,
-      signOptions: {expiresIn: '1d'}
+      signOptions: { expiresIn: '1d' }
     })
   ],
   providers: [AuthService, LocalStrategy, JwtService, DatabaseService, UsersService],
@@ -24,4 +24,4 @@ import { UsersService } from '../users/service/users/users.service';
   exports: [AuthService]
 })
 
-export class AuthModule {}
+export class AuthModule { }
