@@ -3,6 +3,7 @@ import { DatabaseService } from '../../../database/database.service';
 import { User } from '@prisma/client';
 import { userCreateDto } from '../../Dtos/userCreate.dto';
 import * as bcrypt from 'bcrypt';
+import { GoogleUserDto } from '../../Dtos/google.user.dto';
 
 
 @Injectable()
@@ -28,6 +29,12 @@ export class UsersService {
             }
         });
         return users;
+    }
+
+    async createGoogleUser(googleUserDto: GoogleUserDto) {
+        return await this.databaseService.user.create({
+            data: { ...googleUserDto },
+        });
     }
 
     findOneByEmail(_email: string) {

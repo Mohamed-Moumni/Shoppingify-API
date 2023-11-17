@@ -16,7 +16,7 @@ export class PrismaExeceptionFilter extends BaseExceptionFilter {
         const status = HttpStatus.CONFLICT;
         response.status(status).json({
           statusCode: status,
-          message: message,
+          message: "The Record already exist in the database",
         });
         break;
       }

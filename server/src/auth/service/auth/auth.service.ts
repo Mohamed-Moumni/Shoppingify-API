@@ -1,11 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../../../users/service/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { userCreateDto } from '../../../users/Dtos/userCreate.dto';
 import { DatabaseService } from '../../../database/database.service';
 import * as bcrypt from 'bcrypt';
 import { Response } from 'express';
-import { configService } from '../../../config/config.service';
 
 export type payload = {
     sub: string,
@@ -29,10 +28,9 @@ export class AuthService {
         const token: string = this.jwtService.sign(payload);
         res.cookie('jwt', token, {
             maxAge: 2592000000,
-            sameSite: true,
+            sameSite: 'strict',
             secure: false,
         });
-        res.redirect(`${configService.getValue('HOST')}:${configService.getValue('PORT')}/api/users/home`);
     }
 
     async matchPassword(password: string, storedHashedPassword: string): Promise<Boolean> {
