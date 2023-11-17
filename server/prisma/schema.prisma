@@ -30,7 +30,7 @@ model User{
 
 model Item{
   id String @id @default(uuid())
-  name String @unique
+  name String
   note String
   image String
   create_at DateTime @default(now())

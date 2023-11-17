@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ItemCreateDto } from '../Dtos/item.create.dto';
 import { Item } from '@prisma/client';
 import { CategoriesService } from '../../categories/service/categories.service';
+import { ItemUpdateDto } from '../Dtos/item.update.dto';
 
 const category1Id = uuidv4();
 const category2Id = uuidv4();
@@ -16,7 +17,7 @@ const items = [
   { id: itemsId[0], name: "Avocado", note: "bla bla avocado note", image: "./src/public/img1.png", created_at: new Date(), categoryId: category1Id },
   { id: itemsId[1], name: "Banana", note: "bla bla Banana note", image: "./src/public/img2.png", created_at: new Date(), categoryId: category1Id },
   { id: itemsId[2], name: "Salamon", note: "bla bla Salamon note", image: "./src/public/img3.png", created_at: new Date(), categoryId: category2Id },
-  { id: itemsId[3], name: "Chiken", note: "bla bla Chiken note", image: "./src/public/img4.png", created_at: new Date(), categoryId: category2Id },
+  { id: itemsId[3], name: "Chicken", note: "bla bla Chiken note", image: "./src/public/img4.png", created_at: new Date(), categoryId: category2Id },
   { id: itemsId[4], name: "Watermelon", note: "bla bla Watermelon note", image: "./src/public/img5.png", created_at: new Date(), categoryId: category3Id },
 ];
 
@@ -25,6 +26,8 @@ const category = [
   { id:category2Id, name: "Vegetable"},
 ];
 
+const UpdatedItem = { id: itemsId[1], name: "Watermelon", note: "bla bla Watermelon note", image: "./src/public/img5.png", created_at: new Date(), categoryId: category3Id };
+
 const db = {
   item: {
     findMany: jest.fn().mockResolvedValue(items),
@@ -32,8 +35,8 @@ const db = {
     // findFirst: jest.fn().mockResolvedValue(),
     create: jest.fn().mockReturnValue(items[0]),
     // save: jest.fn(),
-    // update: jest.fn().mockResolvedValue(),
-    // delete: jest.fn().mockResolvedValue(),
+    update: jest.fn().mockResolvedValue(UpdatedItem),
+    delete: jest.fn().mockResolvedValue(items[3])
   },
   category: {
     create: jest.fn().mockReturnValue(category[0]),
@@ -85,11 +88,20 @@ describe('ItemsService', () => {
     }));
   });
 
-  // it('should return the updated item', () => {
+  it('should return the updated item', async () => {
+    const itemUpdateDto: ItemUpdateDto = {
+      name: "Watermelon",
+      note: "bla bla Watermelon note",
+      image: "./src/public/img5.png",
+      category: "Fruit"
+    }
+    const UpdateItem = await itemService.updateItemById(itemsId[0].id, itemUpdateDto);
 
-  // });
+    expect(UpdateItem).toEqual(UpdatedItem);
+  });
 
-  // it('should return the deleted item', () => {
-    
-  // });
+  it('should return the deleted item', async () => {
+    const item1 = await itemService.deleteItemById(itemsId[3].id);
+    expect(item1).toEqual(items[3]);
+  });
 });
