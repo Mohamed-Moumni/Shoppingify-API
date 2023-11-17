@@ -7,6 +7,7 @@ import { AuthController } from './auth/controller/auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './auth/common/strategies/google.strategy';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { GoogleStrategy } from './auth/common/strategies/google.strategy';
       isGlobal: true,
     }),
     AuthModule,
-    PassportModule
+    PassportModule,
+    CategoriesModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, GoogleStrategy],

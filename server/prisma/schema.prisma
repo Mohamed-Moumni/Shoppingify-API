@@ -42,7 +42,7 @@ model Item{
 }
 
 model Category{
-  id String @id @default(uuid())
+  id   String @id @default(uuid())
   name String @unique
 
   items Item[]
