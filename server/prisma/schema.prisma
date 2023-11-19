@@ -14,6 +14,7 @@ enum State {
   CANCELED
   COMPLETED
 }
+
 model User{
   id String @id @default(uuid())
 
@@ -43,7 +44,9 @@ model Item{
 
   user User @relation(fields: [userId], references: [id], name: "User Item")
   userId String
-  // listItem ListItem[]
+
+  listItem ListItem @relation(fields: [listItemId], references: [id])
+  listItemId String @unique
 }
 
 model Category{
@@ -53,20 +56,21 @@ model Category{
   items Item[]
 }
 
-// model List{
-//   id String @id @default(uuid())
-//   name String
-//   state State
-//   listItem ListItem[]
-// }
+model List{
+  id       String @id @default(uuid())
+  name     String
+  state    State
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
+  
+  listItem ListItem[]
+}
 
-// model ListItem{
-//   @@id([listId, itemId])
-//   count Int
-//   added_at DateTime
+model ListItem{
+  id String @id @unique @default(uuid())
+  Item Item?
+  count Int
 
-//   list List @relation(fields: [listId], references: [id])
-//   listId String
-//   item Item @relation(fields: [itemId], references: [id])
-//   itemId String
-// }
+  list List @relation(fields: [listId], references: [id])
+  listId String
+}

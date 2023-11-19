@@ -9,6 +9,7 @@ import { PassportModule } from '@nestjs/passport';
 import { GoogleStrategy } from './auth/common/strategies/google.strategy';
 import { CategoriesModule } from './categories/categories.module';
 import { ItemsModule } from './items/items.module';
+import { ListModule } from './list/list.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { ItemsModule } from './items/items.module';
     AuthModule,
     PassportModule,
     CategoriesModule,
-    ItemsModule
+    ItemsModule,
+    ListModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, GoogleStrategy],
