@@ -26,6 +26,8 @@ model User{
   password String?
 
   created_at DateTime @default(now())
+
+  items Item[] @relation("User Item")
 }
 
 model Item{
@@ -38,6 +40,9 @@ model Item{
 
   category Category @relation(fields: [categoryId], references: [id])
   categoryId String
+
+  user User @relation(fields: [userId], references: [id], name: "User Item")
+  userId String
   // listItem ListItem[]
 }
 

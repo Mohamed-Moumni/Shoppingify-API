@@ -26,15 +26,14 @@ const category = [
   { id:category2Id, name: "Vegetable"},
 ];
 
+const UserId = uuidv4();
+
 const UpdatedItem = { id: itemsId[1], name: "Watermelon", note: "bla bla Watermelon note", image: "./src/public/img5.png", created_at: new Date(), categoryId: category3Id };
 
 const db = {
   item: {
     findMany: jest.fn().mockResolvedValue(items),
-    // findUnique: jest.fn().mockResolvedValue(),
-    // findFirst: jest.fn().mockResolvedValue(),
     create: jest.fn().mockReturnValue(items[0]),
-    // save: jest.fn(),
     update: jest.fn().mockResolvedValue(UpdatedItem),
     delete: jest.fn().mockResolvedValue(items[3])
   },
@@ -78,7 +77,7 @@ describe('ItemsService', () => {
         category: "Fruit"
     }
 
-    const item: Item = await itemService.createItem(itemCreateDto);
+    const item: Item = await itemService.createItem(itemCreateDto, UserId);
 
     expect(item).toEqual(expect.objectContaining({
       name: items[0].name,

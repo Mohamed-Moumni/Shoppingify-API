@@ -11,7 +11,7 @@ export class ItemsService {
     {   
     }
 
-    async createItem(itemCreateDto: ItemCreateDto): Promise<Item>{
+    async createItem(itemCreateDto: ItemCreateDto, userId:string): Promise<Item>{
         let Category = await this.categoryService.getCategoryByName(itemCreateDto.name);
         if (!Category)
             Category = await this.categoryService.createCategory(itemCreateDto.name);
@@ -22,6 +22,9 @@ export class ItemsService {
                 image: itemCreateDto.image,
                 category: {
                     connect: { id: Category.id },
+                },
+                user: {
+                    connect: {id: userId},
                 }
             },
         });
@@ -33,7 +36,7 @@ export class ItemsService {
         });
     }
 
-    async updateItemById(ItemId:string, itemUpdateDto: ItemUpdateDto): Promise<Item>{
+    async updateItemById(ItemId: string, itemUpdateDto: ItemUpdateDto): Promise<Item>{
         let Category = await this.categoryService.createCategory(itemUpdateDto.name);
         if (!Category)
             Category = await this.categoryService.createCategory(itemUpdateDto.name);
@@ -51,4 +54,5 @@ export class ItemsService {
             }
         });
     }
+    
 }

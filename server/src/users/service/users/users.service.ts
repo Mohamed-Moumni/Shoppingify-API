@@ -25,6 +25,10 @@ export class UsersService {
     async getUsers() {
         const users: any = await this.databaseService.user.findMany({
             select: {
+                firstname: true,
+                lastname: true,
+                email: true,
+                created_at:true,
                 password: false,
             }
         });
