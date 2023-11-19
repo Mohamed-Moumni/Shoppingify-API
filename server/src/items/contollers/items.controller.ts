@@ -2,13 +2,14 @@ import { Body, Controller, Delete, FileTypeValidator, FileValidator, Get, HttpSt
 import { ItemsService } from '../services/items.service';
 import { ItemUpdateDto } from '../Dtos/item.update.dto';
 import { ItemCreateDto } from '../Dtos/item.create.dto';
-import { ApiBody, ApiConsumes, ApiOkResponse, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../../auth/common/gurads/Auth.guard';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request, Express, Response } from 'express';
 import { storage } from '../utils/storage.config';
 import { Item } from '@prisma/client';
 
+@ApiTags('Items')
 @Controller('items')
 export class ItemsController {
     constructor(private itemService: ItemsService) {
