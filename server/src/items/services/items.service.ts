@@ -12,9 +12,9 @@ export class ItemsService {
     }
 
     async createItem(itemCreateDto: ItemCreateDto, userId:string): Promise<Item>{
-        let Category = await this.categoryService.getCategoryByName(itemCreateDto.name);
+        let Category = await this.categoryService.getCategoryByName(itemCreateDto.category);
         if (!Category)
-            Category = await this.categoryService.createCategory(itemCreateDto.name);
+            Category = await this.categoryService.createCategory(itemCreateDto.category);
         return this.databaseService.item.create({
             data: {
                 name: itemCreateDto.name,
@@ -54,5 +54,18 @@ export class ItemsService {
             }
         });
     }
-    
+
+    async getItemsByUserId(userId: string) {
+        let userItems: { categoryName: string, item: Item }[] = [];
+        let allItems: Item[] = await this.databaseService.item.findMany({
+            where: {
+                userId: userId,
+            }
+        });
+        for (const item of allItems) {
+            const name: string = (await this.categoryService.getCategoryById(item.categoryId)).name;
+            userItems.push({ categoryName: name, item: item });
+        }
+        return userItems;
+    }
 }

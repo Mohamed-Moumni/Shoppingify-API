@@ -20,4 +20,10 @@ export class CategoriesService {
             where:{name:categoryName,}
         });
     }
+
+    getCategoryById(categoryId: string) {
+        return this.databaseService.category.findFirst({
+            where: { id: categoryId },
+        });
+    }
 }
